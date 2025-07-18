@@ -25,14 +25,13 @@ def criar_tabela(dados):
                 "low": float(item["low"])
             }
             tabela_limpa.append(nova_linha)
-    
-    df = pd.DataFrame(tabela_limpa)
-    df["timestamp"] = df['timestamp'].astype(int)
-    df["bid"] = df["bid"].astype(float)
+
+    df = pd.DataFrame(tabela_limpa)  # CORRIGIDO AQUI
     df["data"] = pd.to_datetime(df["timestamp"], unit="s")
     df = df.sort_values("data")
-    tabela = (df[["data", "bid", "ask", "high", "low"]].tail(30))
+    tabela = df[["data", "bid", "ask", "high", "low"]].tail(30)
     return tabela
+
 
 #função criar gradico usando mtplotlib
 def criar_grafico(tabela, periodo, moeda_escolhida):
