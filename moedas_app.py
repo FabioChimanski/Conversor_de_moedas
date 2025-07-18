@@ -32,6 +32,12 @@ def criar_tabela(dados):
     tabela = df[["data", "bid", "ask", "high", "low"]].tail(30)
     return tabela
 
+#função formatar tabela
+def formatar_tabela_em_reais(tabela):
+    colunas_para_formatar = ["bid", "ask", "high", "low"]
+    for coluna in colunas_para_formatar:
+        tabela[coluna] = tabela[coluna].apply(lambda x: f"R$ {x:,.4f}".replace(",", "X").replace(".", ",").replace("X", "."))
+    return tabela
 
 #função criar gradico usando mtplotlib
 def criar_grafico(tabela, periodo, moeda_escolhida):
@@ -71,12 +77,15 @@ dados = buscar_dados(moeda_escolhida, periodo)
 
 #Chamada função criar tabela
 tabela = criar_tabela(dados)
-apresentar_tabela = st.dataframe(tabela)
 
-#Chamada função grafico
+# Exibe tabela formatada (com R$)
+tabela_formatada = formatar_tabela_em_reais(tabela.copy())  # usa .copy() para evitar conflitos
+st.dataframe(tabela_formatada)
+
+# Cria gráfico com dados numéricos
 criar_grafico(tabela, periodo, moeda_escolhida)
 
-#botão download CSV
+# Gera CSV com dados numéricos
 csv = gerar_csv_download(tabela)
 st.download_button(
     label="📥 Baixar CSV",
