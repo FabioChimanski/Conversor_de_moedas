@@ -79,7 +79,8 @@ dados = buscar_dados(moeda_escolhida, periodo)
 tabela = criar_tabela(dados)
 
 # Cria gráfico com dados numéricos
-criar_grafico(tabela, periodo, moeda_escolhida)
+if (periodo > 1):
+    criar_grafico(tabela, periodo, moeda_escolhida)
 
 # Exibe tabela formatada (com R$)
 tabela_formatada = formatar_tabela_em_reais(tabela.copy())  # usa .copy() para evitar conflitos
