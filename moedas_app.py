@@ -75,11 +75,11 @@ st.write(f'Você escolheu a moeda {moeda_escolhida} para os últimos {periodo} d
 #chamda função dados API
 dados = buscar_dados(moeda_escolhida, periodo)
 
-# Cria gráfico com dados numéricos
-criar_grafico(tabela, periodo, moeda_escolhida)
-
 #Chamada função criar tabela
 tabela = criar_tabela(dados)
+
+# Cria gráfico com dados numéricos
+criar_grafico(tabela, periodo, moeda_escolhida)
 
 # Exibe tabela formatada (com R$)
 tabela_formatada = formatar_tabela_em_reais(tabela.copy())  # usa .copy() para evitar conflitos
