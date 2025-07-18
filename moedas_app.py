@@ -35,7 +35,6 @@ def criar_tabela(dados):
 
 #função criar gradico usando mtplotlib
 def criar_grafico(tabela, periodo, moeda_escolhida):
-    plt.style.use('seaborn-vibrant')
     
     plt.figure(figsize=(10, 5))
     
